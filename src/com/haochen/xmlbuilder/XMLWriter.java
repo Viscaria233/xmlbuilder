@@ -2,7 +2,6 @@ package com.haochen.xmlbuilder;
 
 import com.haochen.xmlbuilder.exception.IllegalFileFormatException;
 
-import java.beans.Encoder;
 import java.io.*;
 
 /**
