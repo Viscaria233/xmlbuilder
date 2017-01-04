@@ -39,8 +39,11 @@ class C {                                       //ignored
 }
 
 /*
-    only the instance of class with @XMLBean can be use for builder.build(). @XMLBean means the root element of XML
-    all fields with @XMLNode will be included in XML although its class has not @XMLBean. @XMLNode means child element of XML
+    only the instance of class with @XMLBean can be use for builder.build()
+    @XMLBean means the root element of XML
+    
+    all fields with @XMLNode will be included in XML although its class has not @XMLBean
+    @XMLNode means child element of XML
 */
 public static void main(String[] args) {
     XMLBuilder b = new XMLBuilder();
@@ -60,7 +63,7 @@ Same class and same id means the same instance
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <A class="com.haochen.xmlbuilder.A" id="0">     <!--refers to the instance of A which has the id=0-->
-                                                    <!--if id=0 not exists, then refers to a new instance of A given an id=0-->
+                          <!--if id=0 not exists, then refers to a new instance of A given an id=0-->
 	<aFloat
 			class="float"
 			field="aFloat">
@@ -70,12 +73,12 @@ Same class and same id means the same instance
 			class="int"
 			field="aInt">
 		2017
-	</aInt>                                         <!--@XMLNode() use the field name for tag name-->
+	</aInt>					<!--@XMLNode() use the field name for tag name-->
 	<text                                           
 			class="java.lang.String"
 			field="aString">
 		xmlbuilder
-	</text>                                         <!--@XMLNode(name = "text") tag name is "text"-->
+	</text>                                 <!--@XMLNode(name = "text") tag name is "text"-->
 	<aB
 			class="com.haochen.xmlbuilder.B"
 			field="aB"
@@ -83,15 +86,15 @@ Same class and same id means the same instance
 		<bA
 				class="com.haochen.xmlbuilder.A"
 				field="bA"
-				id="0">                             <!--refers to the Object of A which has the id=0-->
+				id="0">      	<!--refers to the Object of A which has the id=0-->
 		</bA>
 		<bC
 				class="com.haochen.xmlbuilder.C"
 				field="bC"
 				id="0">
 		</bC>
-	</aB>                                           <!--this is a field of A, so @XMLBean(name = "Beanb") has ignored-->
-                                                    <!--tag name was specified by @XMLNode()-->
+	</aB>           	<!--this is a field of A, so @XMLBean(name = "Beanb") has ignored-->
+                                <!--tag name was specified by @XMLNode()-->
 </A>
 ```
 builder.build(c) will get nothing because class C has not @XMLBean  
@@ -124,8 +127,8 @@ public static void main(String args) {
     File file = new File("test.xml");
     XMLReader reader = new XMLReader();
     try {
-        Object o = reader.read(file);               //o is a new Object of class A, which has the same content with [Row 44]
-    } catch (IllegalFileFormatException e) {        //if the file is not a .xml file
+        Object o = reader.read(file);		//o is a new Object of class A, which has the same content with [Row 44]
+    } catch (IllegalFileFormatException e) {    //if the file is not a .xml file
         e.printStackTrace();
     }
 }
