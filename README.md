@@ -127,7 +127,8 @@ public static void main(String args) {
     File file = new File("test.xml");
     XMLReader reader = new XMLReader();
     try {
-        Object o = reader.read(file);		//o is a new Object of class A, which has the same content with [Row 44]
+        Object o = reader.read(file);
+			//o is a new Object of class A, which has the same content with [Row 44]
     } catch (IllegalFileFormatException e) {    //if the file is not a .xml file
         e.printStackTrace();
     }
