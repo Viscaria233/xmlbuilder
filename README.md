@@ -5,7 +5,7 @@ Dependence:
   
 Build XML file with an Object, and get an Object from XML  
 Support primitive type  
-Using 2 Annocations @XMLBean, @XMLNode  
+Using 2 Annotations @XMLBean, @XMLNode  
   
 Encoding: UTF-8 only  
   
