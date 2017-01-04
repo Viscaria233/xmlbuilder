@@ -1,5 +1,5 @@
 # xmlbuilder
-Dependence:\<br>
+Dependence:\<br/>
             dom4j\<br>
 \<br>
 \<br>
