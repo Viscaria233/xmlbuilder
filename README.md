@@ -1,15 +1,15 @@
 # xmlbuilder
 Dependence:  
-            dom4j 
-\<br>
-\<br>
-Build XML file with an Object, and get an Object from XML\<br>
-Support primitive type\<br>
-Using 2 Annocations @XMLBean, @XMLNode\<br>
-\<br>
-Encoding: UTF-8 only\<br>
-\<br>
-Example:\<br>
+            dom4j  
+  
+  
+Build XML file with an Object, and get an Object from XML  
+Support primitive type  
+Using 2 Annocations @XMLBean, @XMLNode  
+  
+Encoding: UTF-8 only  
+  
+Example:  
 ```java
 @XMLBean()
 class A {
@@ -54,9 +54,10 @@ public static void main(String[] args) {
     System.out.println(b.build(a));
 }
 ```
-Result:\<br>
-Same class and same id means the same instance\<br>
-\<br>
+Result:  
+Same class and same id means the same instance  
+  
+```html
 <?xml version="1.0" encoding="UTF-8"?>
 <A class="com.haochen.xmlbuilder.A" id="0">     <!--refers to the instance of A which has the id=0-->
                                                     <!--if id=0 not exists, then refers to a new instance of A given an id=0-->
@@ -92,12 +93,11 @@ Same class and same id means the same instance\<br>
 	</aB>                                           <!--this is a field of A, so @XMLBean(name = "Beanb") has ignored-->
                                                     <!--tag name was specified by @XMLNode()-->
 </A>
-\<br>
-builder.build(c) will get nothing because class C has not @XMLBean\<br>
-\<br>
-\<br>
-\<br>
-Write XML into a file:\<br>
+```
+builder.build(c) will get nothing because class C has not @XMLBean  
+  
+  
+Write XML into a file:  
 ```java
 public static void main(String args) {
     A a;
@@ -114,13 +114,11 @@ public static void main(String args) {
     }
 }
 ```
-Result:\<br>
-write XML into test.xml with UTF-8\<br>
-\<br>
-\<br>
-\<br>
-\<br>
-Get Object:\<br>
+Result:  
+write XML into test.xml with UTF-8  
+  
+  
+Get Object:  
 ```java
 public static void main(String args) {
     File file = new File("test.xml");
