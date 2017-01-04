@@ -1,19 +1,18 @@
 # xmlbuilder
-
-Dependence:
-            dom4j
-            
-
-Build XML file with an Object, and get an Object from XML
-Support primitive type
-Using 2 Annocations @XMLBean, @XMLNode
-
-Encoding: UTF-8 only
-
-Example:
-
+Dependence:\<br>
+            dom4j\<br>
+\<br>
+\<br>
+Build XML file with an Object, and get an Object from XML\<br>
+Support primitive type\<br>
+Using 2 Annocations @XMLBean, @XMLNode\<br>
+\<br>
+Encoding: UTF-8 only\<br>
+\<br>
+Example:\<br>
+```java
 @XMLBean()
-class A {\n
+class A {
     double aDouble = 20.17;                     //has not @XMLNode. Will not be included in XML
     @XMLNode()                                  //the tag name is the field name "aFloat"
     float aFloat;                               //0
@@ -54,9 +53,10 @@ public static void main(String[] args) {
     b.bC = c;
     System.out.println(b.build(a));
 }
-Result:
-
-Same class and same id means the same instance
+```
+Result:\<br>
+Same class and same id means the same instance\<br>
+\<br>
 <?xml version="1.0" encoding="UTF-8"?>
 <A class="com.haochen.xmlbuilder.A" id="0">     <!--refers to the instance of A which has the id=0-->
                                                     <!--if id=0 not exists, then refers to a new instance of A given an id=0-->
@@ -92,12 +92,13 @@ Same class and same id means the same instance
 	</aB>                                           <!--this is a field of A, so @XMLBean(name = "Beanb") has ignored-->
                                                     <!--tag name was specified by @XMLNode()-->
 </A>
-
-builder.build(c) will get nothing because class C has not @XMLBean
-
-
-
-Write XML into a file:
+\<br>
+builder.build(c) will get nothing because class C has not @XMLBean\<br>
+\<br>
+\<br>
+\<br>
+Write XML into a file:\<br>
+```java
 public static void main(String args) {
     A a;
     /*
@@ -112,13 +113,15 @@ public static void main(String args) {
         e.printStackTrace();
     }
 }
-Result:
-write XML into test.xml with UTF-8
-
-
-
-
-Get Object:
+```
+Result:\<br>
+write XML into test.xml with UTF-8\<br>
+\<br>
+\<br>
+\<br>
+\<br>
+Get Object:\<br>
+```java
 public static void main(String args) {
     File file = new File("test.xml");
     XMLReader reader = new XMLReader();
@@ -128,3 +131,4 @@ public static void main(String args) {
         e.printStackTrace();
     }
 }
+```
