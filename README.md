@@ -57,7 +57,7 @@ public static void main(String[] args) {
 Result:  
 Same class and same id means the same instance  
   
-```html
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <A class="com.haochen.xmlbuilder.A" id="0">     <!--refers to the instance of A which has the id=0-->
                                                     <!--if id=0 not exists, then refers to a new instance of A given an id=0-->
