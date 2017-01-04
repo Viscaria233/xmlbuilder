@@ -13,7 +13,7 @@ Encoding: UTF-8 only
 Example:
 
 @XMLBean()
-class A {
+class A {\n
     double aDouble = 20.17;                     //has not @XMLNode. Will not be included in XML
     @XMLNode()                                  //the tag name is the field name "aFloat"
     float aFloat;                               //0
