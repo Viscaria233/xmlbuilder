@@ -10,6 +10,7 @@ Using 2 Annocations @XMLBean, @XMLNode
 Encoding: UTF-8 only  
   
 Example:  
+Get XML String
 ```java
 @XMLBean()
 class A {
@@ -105,7 +106,7 @@ Write XML into a file:
 public static void main(String args) {
     A a;
     /*
-        Create the same Object a like [Row 44]
+        Create the same Object a like [Get XML String]
     */
     
     File file = new File("test.xml");
@@ -121,14 +122,14 @@ Result:
 write XML into test.xml with UTF-8  
   
   
-Get Object:  
+Get Object from XML:  
 ```java
 public static void main(String args) {
     File file = new File("test.xml");
     XMLReader reader = new XMLReader();
     try {
         Object o = reader.read(file);
-			//o is a new Object of class A, which has the same content with [Row 44]
+			//o is a new Object of class A, which has the same content with [Get XML String]
     } catch (IllegalFileFormatException e) {    //if the file is not a .xml file
         e.printStackTrace();
     }
