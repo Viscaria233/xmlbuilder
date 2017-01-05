@@ -1,13 +1,19 @@
 # xmlbuilder
 Dependence:  
-            dom4j  
+dom4j  
   
   
 Build XML file with an Object, and get an Object from XML  
-Support primitive type  
 Using 2 Annotations @XMLBean, @XMLNode  
+All classes included in XML must have default constructor  
   
-Encoding: UTF-8 only  
+Type supporting:  
+primitive types except their wrapping classes like Integer/Boolean...  
+String  
+classes with default constructor  
+  
+Encoding:  
+UTF-8 only  
   
 Example:  
 Get XML String
