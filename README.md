@@ -70,7 +70,7 @@ Same class and same id means the same instance
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <A class="com.haochen.xmlbuilder.A" id="0">     <!--refers to the instance of A which has the id=0-->
-                          <!--if id=0 not exists, then refers to a new instance of A given an id=0-->
+                        <!--if id=0 do not exists, then refers to a new instance of A given an id=0-->
 	<aFloat
 			class="float"
 			field="aFloat">
@@ -93,14 +93,14 @@ Same class and same id means the same instance
 		<bA
 				class="com.haochen.xmlbuilder.A"
 				field="bA"
-				id="0">      	<!--refers to the Object of A which has the id=0-->
+				id="0">      	<!--refers to the Object of A which has the id=0, just the root element-->
 		</bA>
 		<bC
 				class="com.haochen.xmlbuilder.C"
 				field="bC"
 				id="0">
 		</bC>
-	</aB>           	<!--this is a field of A, so @XMLBean(name = "Beanb") has ignored-->
+	</aB>           	<!--this is a field of A, so @XMLBean(name = "Beanb") was ignored-->
                                 <!--tag name was specified by @XMLNode()-->
 </A>
 ```
