@@ -12,11 +12,21 @@ public class XMLWriter {
         if (!file.getName().endsWith(".xml")) {
             throw new IllegalFileFormatException();
         }
+        writeStringToFile(new XMLBuilder().build(obj), file);
+    }
+
+    public void write(String xmlString, File file) throws IllegalFileFormatException {
+        if (!file.getName().endsWith(".xml")) {
+            throw new IllegalFileFormatException();
+        }
+        writeStringToFile(xmlString, file);
+    }
+
+    protected void writeStringToFile(String str, File file) {
         Writer writer = null;
         try {
             writer = new OutputStreamWriter(new FileOutputStream(file), "UTF-8");
 
-            String str = new XMLBuilder().build(obj);
             writer.write(str);
             writer.flush();
         } catch (IOException e) {

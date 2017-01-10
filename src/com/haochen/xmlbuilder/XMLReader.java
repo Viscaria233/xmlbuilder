@@ -41,6 +41,14 @@ public class XMLReader {
         return obj;
     }
 
+    public Object read(String xmlString) throws IllegalFileFormatException {
+        File file = new File("xml_temp_" + new Date().getTime() + ".xml");
+        new XMLWriter().write(xmlString, file);
+        Object obj = new XMLReader().read(file);
+        file.delete();
+        return obj;
+    }
+
     protected Object getObject(Element element) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchFieldException, NoSuchMethodException, InvocationTargetException {
         String className = element.attributeValue("class");
         Object obj = null;
