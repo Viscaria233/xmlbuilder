@@ -1,6 +1,6 @@
 package com.haochen.xmlbuilder;
 
-import com.haochen.xmlbuilder.exception.IllegalFileFormatException;
+import com.haochen.xmlbuilder.xmlutil.XMLUtil;
 
 import java.io.*;
 
@@ -8,18 +8,15 @@ import java.io.*;
  * Created by Haochen on 2017/1/2.
  */
 public class XMLWriter {
-    public void write(Object obj, File file) throws IllegalFileFormatException {
-        if (!file.getName().endsWith(".xml")) {
-            throw new IllegalFileFormatException();
-        }
-        writeStringToFile(new XMLBuilder().build(obj), file);
+    public void write(Object obj, File file) {
+        writeStringToFile(XMLUtil.xmlString(obj), file);
     }
 
-    public void write(String xmlString, File file) throws IllegalFileFormatException {
-        if (!file.getName().endsWith(".xml")) {
-            throw new IllegalFileFormatException();
-        }
-        writeStringToFile(xmlString, file);
+    public void write(String xmlString, File file) {
+        File target = file.getName().endsWith(".xml") ?
+            file : new File(file.getParent(), file.getName() + ".xml");
+
+        writeStringToFile(xmlString, target);
     }
 
     protected void writeStringToFile(String str, File file) {

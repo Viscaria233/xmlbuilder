@@ -1,6 +1,5 @@
 package com.haochen.xmlbuilder;
 
-import com.haochen.xmlbuilder.exception.IllegalFileFormatException;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentFactory;
@@ -20,9 +19,9 @@ public class XMLReader {
 
     protected Map<Class, Map<Integer, Object>> map;
 
-    public Object read(File file) throws IllegalFileFormatException {
+    public Object read(File file) {
         if (!file.getName().endsWith(".xml")) {
-            throw new IllegalFileFormatException();
+            return null;
         }
         this.map = new HashMap<>();
         Object obj = null;
@@ -38,14 +37,6 @@ public class XMLReader {
             this.map.clear();
             this.map = null;
         }
-        return obj;
-    }
-
-    public Object read(String xmlString) throws IllegalFileFormatException {
-        File file = new File("xml_temp_" + new Date().getTime() + ".xml");
-        new XMLWriter().write(xmlString, file);
-        Object obj = new XMLReader().read(file);
-        file.delete();
         return obj;
     }
 
@@ -95,9 +86,9 @@ public class XMLReader {
         return obj;
     }
 
-    public String xmlString(File file) throws IllegalFileFormatException {
+    public String xmlString(File file) {
         if (!file.getName().endsWith(".xml")) {
-            throw new IllegalFileFormatException();
+            return null;
         }
         Reader reader = null;
         StringBuilder b = new StringBuilder();

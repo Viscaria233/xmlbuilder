@@ -3,13 +3,9 @@ package com.haochen.xmlbuilder.xmlutil;
 /**
  * Created by Haochen on 2017/1/7.
  */
-public class XMLListUtil extends XMLUtil {
-    XMLListUtil(Object obj) {
-        super(obj);
-    }
-
+public class ListUtil extends BaseUtil {
     @Override
-    public String xmlNodeString() {
+    public String xmlString(Object obj, String rootTagName) {
         return null;
     }
 
