@@ -1,16 +1,12 @@
 package com.haochen.xmlbuilder.xmlutil;
 
 /**
- * Created by Haochen on 2017/1/7.
+ * Created by Haochen on 2017/1/11.
  */
-public class EmptyUtil extends XMLUtil {
-    EmptyUtil() {
-        super(null);
-    }
-
+public class EmptyUtil extends BaseUtil {
     @Override
-    public String xmlNodeString() {
-        return null;
+    public String xmlString(Object obj, String rootTagName) {
+        return "";
     }
 
     @Override

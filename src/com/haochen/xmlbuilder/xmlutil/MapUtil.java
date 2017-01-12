@@ -3,13 +3,9 @@ package com.haochen.xmlbuilder.xmlutil;
 /**
  * Created by Haochen on 2017/1/7.
  */
-public class XMLMapUtil extends XMLUtil {
-    XMLMapUtil(Object obj) {
-        super(obj);
-    }
-
+public class MapUtil extends BaseUtil {
     @Override
-    public String xmlNodeString() {
+    public String xmlString(Object obj, String rootTagName) {
         return null;
     }
 

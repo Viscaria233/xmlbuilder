@@ -1,57 +1,50 @@
-package com.haochen.xmlbuilder;
+package com.haochen.xmlbuilder.xmlutil;
 
-import com.haochen.xmlbuilder.annotation.XMLBean;
 import com.haochen.xmlbuilder.annotation.XMLNode;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
- * Created by Haochen on 2017/1/2.
+ * Created by Haochen on 2017/1/7.
  */
-public class XMLBuilder {
-
-    protected Map<Class, List<Object>> map;
-
-    public String build(Object obj) {
+public class BeanUtil extends BaseUtil {
+    @Override
+    public String xmlString(Object obj, String rootTagName) {
         Class clazz = obj.getClass();
-        if (clazz.isAnnotationPresent(XMLBean.class)) {
-            XMLBean bean = (XMLBean) clazz.getAnnotation(XMLBean.class);
-            this.map = new HashMap<>();
-            
-            StringBuilder b = new StringBuilder(xmlHead());
-            String name = "".equals(bean.name()) ? clazz.getSimpleName() : bean.name();
+        this.map = new HashMap<>();
+        StringBuilder b = new StringBuilder(xmlHead());
 
-            //tag start
-            b.append("<").append(name).append(" class=\"").append(clazz.getName()).append("\" id=\"0\">\n");
-            List<Object> list = new ArrayList<>();
-            list.add(obj);
-            map.put(clazz, list);
+        //tag start
+        b.append("<").append(rootTagName).append(" class=\"").append(clazz.getName()).append("\" id=\"0\">\n");
+        List<Object> list = new ArrayList<>();
+        list.add(obj);
+        map.put(clazz, list);
 
-            Field[] fields = clazz.getDeclaredFields();
-            try {
-                for (Field field : fields) {
-                    b.append(xmlNode(obj, field, 1));
-                }
-            } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException | ClassNotFoundException e) {
-                e.printStackTrace();
-            } finally {
-                this.map.clear();
-                this.map = null;
+        Field[] fields = clazz.getDeclaredFields();
+        try {
+            for (Field field : fields) {
+                b.append(xmlNode(obj, field, 1));
             }
-
-            //tag end
-            b.append("</").append(name).append(">\n");
-            return b.toString();
-        } else {
-            return "";
+        } catch (IllegalAccessException | NoSuchMethodException | InvocationTargetException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            this.map.clear();
+            this.map = null;
         }
+
+        //tag end
+        b.append("</").append(rootTagName).append(">\n");
+        return b.toString();
     }
 
-    protected String xmlHead() {
-        return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+    @Override
+    public Object xmlObject() {
+        return null;
     }
 
     protected String xmlNode(Object obj, Field field, int inset) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, ClassNotFoundException {
@@ -89,11 +82,26 @@ public class XMLBuilder {
                 b.append(">\n").append(tab).append("\t").append(field.get(obj)).append("\n");
             } else {
                 Object value = field.get(obj);
-                int[] val = getIDAndExists(value);
+                boolean exists = true;
 
-                b.append("\n").append(tab).append("\t\tid=\"").append(val[0]).append("\">\n");
+                List<Object> list = this.map.get(value.getClass());
+                if (list == null) {
+                    list = new ArrayList<>();
+                    this.map.put(value.getClass(), list);
+                    exists = false;
+                }
 
-                if (val[1] == 0) {
+                int id = list.indexOf(value);
+                if (id == -1) {
+                    id = list.size();
+                    list.add(value);
+                    exists = false;
+                }
+
+
+                b.append("\n").append(tab).append("\t\tid=\"").append(id).append("\">\n");
+
+                if (!exists) {
                     Field[] fields = fieldType.getDeclaredFields();
                     for (Field f : fields) {
                         b.append(xmlNode(value, f, inset + 1));
@@ -107,34 +115,5 @@ public class XMLBuilder {
         } else {
             return "";
         }
-    }
-
-    /**
-     *
-     * @param obj
-     * @return int[2] val;
-     *          val[0] : the id (index of obj)
-     *          val[1] == 0 : did not exists, but added it
-     *          val[1] == 1 : already exists
-     */
-    protected int[] getIDAndExists(Object obj) {
-        if (!this.map.containsKey(obj.getClass())) {
-            this.map.put(obj.getClass(), new ArrayList<>());
-        }
-        List<Object> list = this.map.get(obj.getClass());
-
-        int[] val = {0, 0};
-        for (int i = 0; i < list.size(); ++i) {
-            if (obj == list.get(i)) {
-                val[0] = i;
-                val[1] = 1;
-                break;
-            }
-        }
-        if (val[1] == 0) {
-            val[0] = list.size();
-            list.add(obj);
-        }
-        return val;
     }
 }
