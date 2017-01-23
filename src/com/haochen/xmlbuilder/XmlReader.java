@@ -15,7 +15,7 @@ import java.util.*;
 /**
  * Created by Haochen on 2017/1/2.
  */
-public class XMLReader {
+public class XmlReader {
 
     protected Map<Class, Map<Integer, Object>> map;
 
