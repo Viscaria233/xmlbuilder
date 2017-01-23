@@ -1,4 +1,4 @@
-package com.haochen.xmlbuilder.annotation;
+package com.haochen.xmlbuilder;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -11,6 +11,6 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface XMLNode {
+public @interface XmlNode {
     String name() default "";
 }

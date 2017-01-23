@@ -1,6 +1,6 @@
-package com.haochen.xmlbuilder.xmlutil;
+package com.haochen.xmlbuilder.util;
 
-import com.haochen.xmlbuilder.annotation.XMLNode;
+import com.haochen.xmlbuilder.XmlNode;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -43,18 +43,18 @@ public class BeanUtil extends BaseUtil {
     }
 
     @Override
-    public Object xmlObject() {
+    public Object xmlObject(String xmlString) {
         return null;
     }
 
     protected String xmlNode(Object obj, Field field, int inset) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException, ClassNotFoundException {
         field.setAccessible(true);
-        if (field.isAnnotationPresent(XMLNode.class) && field.get(obj) != null) {
+        if (field.isAnnotationPresent(XmlNode.class) && field.get(obj) != null) {
             String tab = "";
             for (int i = 0; i < inset; ++i) {
                 tab += "\t";
             }
-            XMLNode node = field.getAnnotation(XMLNode.class);
+            XmlNode node = field.getAnnotation(XmlNode.class);
             String name = "".equals(node.name()) ? field.getName() : node.name();
 
             Class fieldType = field.getType();

@@ -1,4 +1,4 @@
-package com.haochen.xmlbuilder.xmlutil;
+package com.haochen.xmlbuilder.util;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,5 +19,5 @@ public abstract class BaseUtil {
     }
 
     public abstract String xmlString(Object obj, String rootTagName);
-    public abstract Object xmlObject();
+    public abstract Object xmlObject(String xmlString);
 }
